@@ -13,8 +13,8 @@ function Board(props) {
                     cards={list.cards}
                     key={i}
                     onAddInputChanged={props.onAddInputChanged.bind(null, i)}
-                    onAddClick={props.onAddClick.bind(null, i)}
-                    onMarkCompleted={props.onMarkCompleted.bind(null, i)} />)
+                    onAddClick={props.onAddClick}
+                    onMarkCompleted={props.onMarkCompleted} />)
         })}
       </div>
     </div>

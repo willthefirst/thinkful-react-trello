@@ -56,7 +56,7 @@ var BoardContainer = React.createClass({
   },
   render: function() {
     return (<Board
-            data={this.state.data}
+            data={this.props.data}
             onAddInputChanged={this.onAddInputChanged}
             onAddClick={this.onAddClick}
             onMarkCompleted={this.onMarkCompleted} />)
