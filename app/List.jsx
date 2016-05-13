@@ -9,11 +9,11 @@ function List(props) {
       <ul>
         {props.cards.map(function(card, i){
           return (<Card
-                    content={card}
+                    data={card}
                     key={i}
                     onAddInputChanged={props.onAddInputChanged.bind(null, i)}
-                    onAddClick={props.onAddClick}
-                    onMarkCompleted={props.onMarkCompleted}
+                    onAddClick={props.onAddClick.bind(null, i)}
+                    onMarkCompleted={props.onMarkCompleted.bind(null, i)}
                   />
           );
         })}

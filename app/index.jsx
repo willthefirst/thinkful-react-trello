@@ -16,7 +16,7 @@ var BoardContainer = React.createClass({
   },
   onAddInputChanged: function(listIndex, cardIndex, event) {
     var newLists = this.state.data.lists.slice();
-    newLists[listIndex].cards[cardIndex] = event.target.value;
+    newLists[listIndex].cards[cardIndex].draftContent = event.target.value;
 
     var newState = Object.assign({}, this.state, {
       data: {
@@ -27,12 +27,32 @@ var BoardContainer = React.createClass({
 
     this.setState(newState);
   },
-  onAddClick: function(e) {
-    console.log(e.target);
-    e.target.value = "";
+  onAddClick: function(listIndex, cardIndex, event) {
+    var newLists = this.state.data.lists.slice();
+    newLists[listIndex].cards[cardIndex].content = newLists[listIndex].cards[cardIndex].draftContent;
+    newLists[listIndex].cards[cardIndex].draftContent = "";
+
+    var newState = Object.assign({}, this.state, {
+      data: {
+        title: this.state.data.title,
+        lists: newLists
+      }
+    });
+
+    this.setState(newState);
   },
-  onMarkCompleted: function() {
-    console.log('Marked complete!');
+  onMarkCompleted: function(listIndex, cardIndex, event) {
+    var newLists = this.state.data.lists.slice();
+    newLists[listIndex].cards[cardIndex].complete = !newLists[listIndex].cards[cardIndex].complete;
+
+    var newState = Object.assign({}, this.state, {
+      data: {
+        title: this.state.data.title,
+        lists: newLists
+      }
+    });
+
+    this.setState(newState);
   },
   render: function() {
     return (<Board
@@ -49,11 +69,17 @@ var boardInfo = {
     lists: [
         {
             title: 'List 1 title',
-            cards: ['Card 1', 'Card 2', 'Card 3']
+            cards: [
+              { content: "Card 1", draftContent: '', complete: false },
+              { content: "Card 2", draftContent: '', complete: false },
+              { content: "Card 3", draftContent: '', complete: false }]
         },
         {
             title: 'List 2 title',
-            cards: ['Card 1', 'Card 2', 'Card 3']
+            cards: [
+              { content: "Card 1", draftContent: '', complete: false },
+              { content: "Card 2", draftContent: '', complete: false },
+              { content: "Card 3", draftContent: '', complete: false }]
         }
     ]
 }
